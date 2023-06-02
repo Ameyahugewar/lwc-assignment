@@ -1,0 +1,89 @@
+<template>
+    <lightning-card title="Search Accounts" icon-name="standard:account">
+        <div if:true={errorMsg} style="margin-left: 3%;">
+            <p style="color: red;">{errorMsg}</p>
+        </div>
+
+        <lightning-layout multiple-rows="true" vertical-align="end">
+            
+            <lightning-layout-item size="12" small-device-size="10" medium-device-size="8" large-device-size="3" padding="around-small">
+                <div class="slds-form-element">
+                        <div class="slds-form-element__control">
+                            <template if:true={billingStatePicklist.data}>
+                                <lightning-combobox name="Billing State" label="Billing State" value={state}
+                                options={billingStatePicklist.data.values} onchange={handleState}>
+                                </lightning-combobox>
+                            </template>
+                        </div>
+                    </div> 
+            </lightning-layout-item>
+
+            <lightning-layout-item size="12" small-device-size="10" medium-device-size="8" large-device-size="3" padding="around-small">
+                <div class="slds-form-element">
+                    <div class="slds-form-element__control">
+                                <lightning-input type="text" 
+                                                label="City" 
+                                                onchange={handleCity} >
+                                </lightning-input>
+                    </div>
+                </div> 
+            </lightning-layout-item>
+
+            <lightning-layout-item size="12" small-device-size="10" medium-device-size="8" large-device-size="3" padding="around-small">
+                <div class="slds-form-element">
+                    <div class="slds-form-element__control">
+                        <template if:true={industryPicklist.data}>
+                            <lightning-combobox name="Industry" label="Industry" value={industry}
+                                options={industryPicklist.data.values} onchange={handleIndustry}>
+                            </lightning-combobox>
+                        </template>
+                    </div>
+                </div> 
+            </lightning-layout-item>
+
+            <lightning-layout-item size="12" small-device-size="10" medium-device-size="8" large-device-size="3" padding="around-small">
+            <div class="slds-form-element">
+                <div class="slds-form-element__control">
+                    <template if:true={ratingPicklist.data}>
+                        <lightning-combobox name="Rating" label="Rating" value={rating}
+                        options={ratingPicklist.data.values} onchange={handleRating}>
+                        </lightning-combobox>
+                        </template>     
+                </div>
+            </div> 
+            </lightning-layout-item>
+
+            <lightning-layout-item size="12" small-device-size="10" medium-device-size="8" large-device-size="3" padding="around-small">
+                    <div class="slds-form-element">
+                            <div class="slds-form-element__control">
+                                    <lightning-input type="text" 
+                                                     label="Enter Account Name" 
+                                                     onchange={handleAccountName} ></lightning-input>
+                            </div>
+                        </div> 
+            </lightning-layout-item>
+            <lightning-layout-item size="12" small-device-size="10" medium-device-size="8" large-device-size="3" padding="around-small">
+                <div class="slds-form-element">
+                        <div class="slds-form-element__control">
+                                <lightning-input type="text" 
+                                                 label="Enter Phone Number" 
+                                                 onchange={handlePhoneNumber} ></lightning-input>
+                        </div>
+                    </div> 
+        </lightning-layout-item>
+            <lightning-layout-item size="12" small-device-size="2" medium-device-size="2" large-device-size="2" padding="around-small">
+                    <lightning-button label="Search" 
+                                      variant="brand" 
+                                      onclick={handleSearch}></lightning-button>
+                </lightning-layout-item>
+            </lightning-layout><br/>
+
+        <div if:true={searchData}>
+            <lightning-datatable data={searchData} 
+                                 columns={columns} 
+                                 key-field="id"
+                                 hide-checkbox-column="true"></lightning-datatable>
+        </div>
+    </lightning-card>
+
+</template>
